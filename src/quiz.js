@@ -36,4 +36,11 @@ return this.currentQuestionIndex++
 
         }
     }
+    filterQuestionsByDifficulty(difficulty){
+
+    }
+
+    averageDifficulty(){
+        
+    }
 }
