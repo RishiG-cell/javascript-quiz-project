@@ -26,8 +26,12 @@ class Quiz {
   }
 
   checkAnswer(answer) {
-    if (answer === answer) {
+    const currentQuestion = this.getQuestion();
+    if (currentQuestion.answer === answer) {
       this.correctAnswers++;
+      return true;
+    } else {
+      return false;
     }
   }
 
