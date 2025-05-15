@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const choiceContainer = document.querySelector("#choices");
   const nextButton = document.querySelector("#nextButton");
 
+  const resetBtn = document.querySelector("#restartButton");
+
   // End view elements
   const resultContainer = document.querySelector("#result");
 
@@ -72,10 +74,31 @@ document.addEventListener("DOMContentLoaded", () => {
   /************  TIMER  ************/
 
   let timer;
-
+  timer = setInterval(() => {
+    quiz.timeRemaining--;
+    const minutes = Math.floor(quiz.timeRemaining / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = (quiz.timeRemaining % 60).toString().padStart(2, "0");
+    timeRemainingContainer.innerText = `${minutes}:${seconds}`;
+    if (quiz.timeRemaining === 0) {
+      clearInterval(timer);
+      showResults();
+    }
+  }, 1000);
   /************  EVENT LISTENERS  ************/
 
   nextButton.addEventListener("click", nextButtonHandler);
+
+  resetBtn.addEventListener("click", () => {
+    quizView.style.display = "flex";
+    endView.style.display = "none";
+    quiz.shuffleQuestions();
+    quiz.timeRemaining = 120;
+    quiz.correctAnswers = 0;
+    quiz.currentQuestionIndex = 0;
+    showQuestion();
+  });
 
   /************  FUNCTIONS  ************/
 
@@ -115,7 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     questionCount.innerText = `Question ${quiz.currentQuestionIndex + 1} of ${
       quiz.questions.length
-    }`; //  This value is hardcoded as a placeholder
+    }`;
+    //  This value is hardcoded as a placeholder
     console.log(quiz.questions[0]);
     quiz.questions[quiz.currentQuestionIndex].choices.forEach((choice) => {
       const newChoice = document.createElement("div");
