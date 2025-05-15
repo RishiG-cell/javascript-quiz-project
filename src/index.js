@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Show the quiz view (div#quizView) and hide the end view (div#endView)
   quizView.style.display = "block";
   endView.style.display = "none";
-
+  
+//view
   /************  QUIZ DATA  ************/
 
   // Array with the quiz questions
